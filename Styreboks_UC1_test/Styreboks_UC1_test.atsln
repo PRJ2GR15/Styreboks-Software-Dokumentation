@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "Styreboks_UC1_test", "Styreboks_UC1_test\Styreboks_UC1_test.cppproj", "{791090B4-8B6C-4C7D-AAB5-A7D3ADB83C1F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{791090B4-8B6C-4C7D-AAB5-A7D3ADB83C1F}.Debug|AVR.ActiveCfg = Debug|AVR
+		{791090B4-8B6C-4C7D-AAB5-A7D3ADB83C1F}.Debug|AVR.Build.0 = Debug|AVR
+		{791090B4-8B6C-4C7D-AAB5-A7D3ADB83C1F}.Release|AVR.ActiveCfg = Release|AVR
+		{791090B4-8B6C-4C7D-AAB5-A7D3ADB83C1F}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
