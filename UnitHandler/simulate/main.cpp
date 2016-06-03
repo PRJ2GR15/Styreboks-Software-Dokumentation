@@ -41,6 +41,9 @@ int main(void)
 		unsigned char status;
 		
 		
+		
+		// Forsøg på et main program, bygget ud fra Christians anvisninger, om hvordan x10 klassen virker...
+		
 		for (int i = 0; i <= unitCount; i++)
 		{
 			if (i % 2 == 1 && Array[i] != 0x00)

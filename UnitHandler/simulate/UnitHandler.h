@@ -49,7 +49,7 @@ public:
 	//Timetable handling
 	bool UpdateTime(unsigned char unitID, unsigned char schedule[]);
 	bool getTimeTable(unsigned char day, unsigned char UnitID, unsigned char schedule[]);
-	bool editUnit(unsigned char previusUnitID, unsigned char newUnitID, unsigned char roomID);
+	bool editUnit(unsigned char previousUnitID, unsigned char newUnitID, unsigned char roomID);
 	
 protected:
 private:

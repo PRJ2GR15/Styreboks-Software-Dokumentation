@@ -789,7 +789,7 @@ bool UnitHandler::getTimeTable(unsigned char day, unsigned char UnitID, unsigned
 // METHOD : editUnit()
 // DESCR. : fills a 512 byte array with the data in the block for the requested day and unit.
 // =============================================================
-bool UnitHandler::editUnit(unsigned char previusUnitID, unsigned char newUnitID, unsigned char roomID)
+bool UnitHandler::editUnit(unsigned char previousUnitID, unsigned char newUnitID, unsigned char roomID)
 {
 	unsigned char data[512];
 	unsigned char data2[512];
@@ -802,7 +802,7 @@ bool UnitHandler::editUnit(unsigned char previusUnitID, unsigned char newUnitID,
 	//Fint the starting point representation of the unit we want too update.
 	for (int i = 0; i <= 511; i++)
 	{
-		if (data[i] == previusUnitID)
+		if (data[i] == previousUnitID)
 		{
 			point = data[i + 1];
 			data[i] = newUnitID;
