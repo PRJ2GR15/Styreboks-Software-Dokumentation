@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "PCInterface", "PCInterface\PCInterface.cppproj", "{ED4378A7-A229-4A3A-A098-AC711B5DCFA1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED4378A7-A229-4A3A-A098-AC711B5DCFA1}.Debug|AVR.ActiveCfg = Debug|AVR
+		{ED4378A7-A229-4A3A-A098-AC711B5DCFA1}.Debug|AVR.Build.0 = Debug|AVR
+		{ED4378A7-A229-4A3A-A098-AC711B5DCFA1}.Release|AVR.ActiveCfg = Release|AVR
+		{ED4378A7-A229-4A3A-A098-AC711B5DCFA1}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
