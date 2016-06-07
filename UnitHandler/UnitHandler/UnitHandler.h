@@ -26,10 +26,8 @@ public:
 	UnitHandler(sdCard *SDObj);
 	
 	//unit handling
-	bool AddUnit(unsigned char unitID);
 	bool AddUnit(unsigned char unitID, unsigned char roomID);
 	bool RemoveUnit(unsigned char unitID);
-	bool checkStdAssignment();
 	
 	unsigned char getUnitCount();
 	
@@ -37,7 +35,6 @@ public:
 	void getUnitList(unsigned char Array[]);
 	bool addUnitToList(unsigned char unitID, unsigned char address);
 	bool removeUnitFromList(unsigned char unitID);
-	unsigned char searchFreeBlocks();
 	
 	//Room-list operations.
 	void getRoomList(unsigned char Array[]);
@@ -50,9 +47,11 @@ public:
 	bool UpdateTime(unsigned char unitID, unsigned char schedule[]);
 	bool getTimeTable(unsigned char day, unsigned char UnitID, unsigned char schedule[]);
 	bool editUnit(unsigned char previusUnitID, unsigned char newUnitID, unsigned char roomID);
-	
-protected:
+
 private:
+	unsigned char searchFreeBlocks();
+	bool checkStdAssignment();
+	
 	
 	sdCard *SD;
 	unsigned char numberOfUnits; // used to count units (up too 255) 
