@@ -19,7 +19,7 @@ public:
 	unsigned char charReady();
 	char readChar();
 	void sendChar(char character);
-	void sendString(char* textptr);
+	void sendString(char* textPtr);
 	void sendInteger(int number);
 
 private:

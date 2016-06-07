@@ -57,12 +57,12 @@ void UART::sendChar(char character)
 }
 
 
-void UART::sendString(char* textptr)
+void UART::sendString(char* textPtr)
 {
-	while (*textptr != 0)
+	while (*textPtr != 0)
 	{
-		sendChar(*textptr);
-		textptr++;
+		sendChar(*textPtr);
+		textPtr++;
 	}
 	
 }
