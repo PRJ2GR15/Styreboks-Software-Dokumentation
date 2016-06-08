@@ -233,6 +233,16 @@ bool PCinterface::handleCMD()
 			break;
 	}
 }
+//=============================================================
+// METHOD : returnStatus
+// DESCR. : takes the unitID and the recieved status and returns it to
+// the PC software through UART.
+//=============================================================
+void PCinterface::returnStatus( unsigned char unitID, unsigned char status )
+{
+	// implementation missing.
+}
+
 
 
 
