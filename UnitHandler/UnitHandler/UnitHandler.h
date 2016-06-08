@@ -26,9 +26,10 @@ public:
 	UnitHandler(sdCard *SDObj);
 	
 	//unit handling
-	bool AddUnit(unsigned char unitID, unsigned char roomID);
+	bool AddUnit(unsigned char unitID, unsigned char roomID = 0x00);
 	bool RemoveUnit(unsigned char unitID);
-	
+	bool editUnit(unsigned char previusUnitID, unsigned char newUnitID, unsigned char roomID);
+
 	unsigned char getUnitCount();
 	
 	//Unit-list operations.
@@ -46,8 +47,7 @@ public:
 	//Timetable handling
 	bool UpdateTime(unsigned char unitID, unsigned char schedule[]);
 	bool getTimeTable(unsigned char day, unsigned char UnitID, unsigned char schedule[]);
-	bool editUnit(unsigned char previusUnitID, unsigned char newUnitID, unsigned char roomID);
-
+	
 private:
 	unsigned char searchFreeBlocks();
 	bool checkStdAssignment();
