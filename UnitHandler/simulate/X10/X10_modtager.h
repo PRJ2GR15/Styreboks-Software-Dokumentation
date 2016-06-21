@@ -16,8 +16,8 @@
 
 
 //=====================================
-// CLASS : X10_modtager
-// DESCR. : 
+// CLASS  : X10_modtager
+// DESCR. : Class for receiving data over X10.1
 //=====================================
 class X10_modtager
 {
@@ -57,6 +57,9 @@ public:
 	
 	unsigned char getData();
 	unsigned char getType();
+	
+	void receiveHigh();
+	void receiveLow();
 		
 private:
 	unsigned int packet1_;

@@ -26,7 +26,7 @@ UnitHandler::UnitHandler(sdCard *SDObj)
 // METHOD : AddUnit()
 // DESCR. : Saves the Unit-info (with room) to the next free block on the SD card.
 //=============================================================
-bool UnitHandler::AddUnit(unsigned char unitID, unsigned char Room = 0x00)
+bool UnitHandler::AddUnit(unsigned char unitID, unsigned char RoomID)
 {
 	numberOfUnits++;
 	//We calculate the standard address assignment from the parameter "numberOfUnits"
@@ -41,7 +41,7 @@ bool UnitHandler::AddUnit(unsigned char unitID, unsigned char Room = 0x00)
 		// Set data specific to the unit.
 		data[0] = unitID;
 		data[1] = numberOfUnits;
-		data[2] = Room;
+		data[2] = RoomID;
 		
 		// For-loop makes sure to create 7 blocks for each unit.
 		// One block represents one day of the week.
@@ -68,7 +68,7 @@ bool UnitHandler::AddUnit(unsigned char unitID, unsigned char Room = 0x00)
 			}
 		}
 		//Add unit to the room and unit list.
-		if (addUnitToRoom(Room))
+		if (addUnitToRoom(RoomID))
 		{
 			return addUnitToList(unitID, numberOfUnits);
 		}		
@@ -86,7 +86,7 @@ bool UnitHandler::AddUnit(unsigned char unitID, unsigned char Room = 0x00)
 		// Set data specific to the unit.
 		data[0] = unitID;
 		data[1] = temp;
-		data[2] = Room;
+		data[2] = RoomID;
 		
 		// For-loop makes sure to create 7 blocks for each unit.
 		// One block represents one day of the week.
@@ -114,7 +114,7 @@ bool UnitHandler::AddUnit(unsigned char unitID, unsigned char Room = 0x00)
 			}
 		}
 		//Add unit to the unit list.
-		if (addUnitToRoom(Room))
+		if (addUnitToRoom(RoomID))
 		{
 			return addUnitToList(unitID, temp);
 		}
@@ -169,18 +169,18 @@ bool UnitHandler::RemoveUnit(unsigned char unitID)
 	}
 	
 	//Loop to overwrite all 7 blocks that represent the unit.
-	for (int i = 0; i <= 6; i++)
+	for (int i = 0; i <= 9; i++)
 	{
 		next_block = start_block + i;
 		
 		//Loop to give each write operation 3 tries to succeed.
-		for (int y = 1; y <= 3; y++)
+		for (int y = 1; y <= 9; y++)
 		{
 			if (SD->writeBlock(next_block, empty_block))
 			{
-				y = 4;			// if write attempt succeeds, leave loop...
+				y = 10;			// if write attempt succeeds, leave loop...
 			}
-			else if (y = 3)
+			else if (y = 9)
 			{
 				return false;
 			}
@@ -252,13 +252,13 @@ bool UnitHandler::addUnitToList(unsigned char unitID, unsigned char address)
 	temp_list[spot] = address;
 		
 	//Write new list to SD
-	for (int y = 1; y <= 3; y++)
+	for (int y = 1; y <= 9; y++)
 	{
 		if (SD->writeBlock(0, temp_list))
 		{
-			y = 4;			// if write attempt succeeds, leave loop...
+			y = 10;			// if write attempt succeeds, leave loop...
 		}
-		else if (y = 3)
+		else if (y = 9)
 		{
 			return false;
 		}
@@ -543,7 +543,7 @@ bool UnitHandler::removeUnitFromRoom(unsigned char unitID, unsigned char roomID)
 		{
 			y = 10;			// if write attempt succeeds, leave loop...
 		}
-		else if (y = 3)
+		else if (y = 9)
 		{
 			return false;
 		}
@@ -575,6 +575,8 @@ bool UnitHandler::removeUnitFromRoom(unsigned char unitID, unsigned char roomID)
 		newList[2] = 0x00;
 		
 		SD->writeBlock(adress_block, newList);
+		
+		newList = {0x00};
 }
 
 
@@ -602,8 +604,6 @@ bool UnitHandler::UpdateTime(unsigned char unitID, unsigned char schedule[])
 			{
 				// set j equal to the starting block representation for the specified unit.
 				int j = i + 1;
-				
-				// extracting unit count for later use;
 				block_representation = tempList[j];  
 				
 				// calculate start block
@@ -697,7 +697,7 @@ bool UnitHandler::getTimeTable(unsigned char day, unsigned char UnitID, unsigned
 // METHOD : editUnit()
 // DESCR. : fills a 512 byte array with the data in the block for the requested day and unit.
 // =============================================================
-bool UnitHandler::editUnit(unsigned char previousUnitID, unsigned char newUnitID, unsigned char roomID)
+bool UnitHandler::editUnit(unsigned char previusUnitID, unsigned char newUnitID, unsigned char roomID)
 {
 	unsigned char data[512];
 	unsigned char data2[512];
@@ -707,15 +707,18 @@ bool UnitHandler::editUnit(unsigned char previousUnitID, unsigned char newUnitID
 	
 	getUnitList(data);
 	
-	//Fint the starting point representation of the unit we want too update.
+	//Find the starting point representation of the unit we want too update.
 	for (int i = 0; i <= 511; i++)
 	{
-		if (data[i] == previousUnitID)
+		if (i % 2 == 0)
 		{
-			point = data[i + 1];
-			data[i] = newUnitID;
-			SD->writeBlock(0x00, data);
-			i = 512;
+			if (data[i] == previusUnitID)
+			{
+				point = data[i + 1];
+				data[i] = newUnitID;
+				SD->writeBlock(0x00, data);
+				i = 512;
+			}
 		}
 	}
 	

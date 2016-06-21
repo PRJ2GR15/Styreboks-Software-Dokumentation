@@ -16,8 +16,8 @@
 
 
 //=====================================
-// CLASS : X10_sender
-// DESCR. : 
+// CLASS  : X10_sender
+// DESCR. : Class for sending data over X10.1
 //=====================================
 class X10_sender
 {

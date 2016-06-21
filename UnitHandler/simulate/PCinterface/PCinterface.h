@@ -12,9 +12,10 @@
 
 #ifndef PCINTERFACE_H_
 #define PCINTERFACE_H_
-#include "../Uart/uart.h";
+#include "../Uart/uartDriver.h"s
 #include "../RTC/rtc.h"
-#include "../UnitHandler.h"
+#include "../UnitHandler/UnitHandler.h"
+#include "../X10/X10.h"
 
 //=====================================
 // CLASS : PCinterface
@@ -23,7 +24,7 @@
 class PCinterface
 {
 public:
-	PCinterface(UnitHandler *Handler_obj, UART *uart_obj); // rtc skal tilføjes senere, er fjernet da den ikke virker.
+	PCinterface(UnitHandler *Handler_obj, UART *uart_obj, rtc *rtc_obj, X10 *x10_obj); // rtc skal tilføjes senere, er fjernet da den ikke virker.
 	unsigned char getCmd(unsigned char bytes[]); // grabs the cmd char from the transmission if start byte is transmitted correctly.
 	unsigned int getData(unsigned char data[]); // takes a 512 byte array as parameter.
 	bool isStart( unsigned char bytes[]); // send in a 2 byte array;
@@ -34,6 +35,7 @@ private:
 	rtc * rtc_obj_pointer;
 	UnitHandler * UnitHandlerPointer;
 	UART * uartPointer;
+	X10 * x10Pointer;
 };
 
 
