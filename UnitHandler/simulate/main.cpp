@@ -86,7 +86,8 @@ int main(void)
 						}
 					}					
 				}				
-			}	
+			}
+			break;	
 	}	
 }
 
