@@ -575,9 +575,7 @@ bool UnitHandler::removeUnitFromRoom(unsigned char unitID, unsigned char roomID)
 		newList[2] = 0x00;
 		
 		SD->writeBlock(adress_block, newList);
-		
-		newList = {0x00};
-}
+	}
 
 
 	return true;

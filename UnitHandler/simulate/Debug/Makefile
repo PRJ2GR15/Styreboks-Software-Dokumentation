@@ -33,7 +33,10 @@ LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
-../PCinterface/ \
+../i2c/ \
+../PCinterface \
+../X10 \
+../UnitHandler \
 ../RTC/ \
 ../sd/ \
 ../SPI/ \
@@ -42,13 +45,17 @@ SUBDIRS :=  \
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../i2c/i2c.cpp \
 ../main.cpp \
 ../PCinterface/PCInterface.cpp \
+../UART/uartDriver.cpp \
+../UnitHandler/UnitHandler.cpp \
 ../RTC/rtc.cpp \
 ../sd/sdCard.cpp \
 ../SPI/SPI.cpp \
-../UART/uart.cpp \
-../UnitHandler.cpp
+../X10/X10.cpp \
+../X10/X10_modtager.cpp \
+../X10/X10_sender.cpp
 
 
 PREPROCESSING_SRCS += 
@@ -58,40 +65,56 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+i2c/i2c.o \
 main.o \
 PCinterface/PCInterface.o \
+UART/uartDriver.o \
+UnitHandler/UnitHandler.o \
 RTC/rtc.o \
 sd/sdCard.o \
 SPI/SPI.o \
-UART/uart.o \
-UnitHandler.o
+X10/X10.o \
+X10/X10_modtager.o \
+X10/X10_sender.o
 
 OBJS_AS_ARGS +=  \
+i2c/i2c.o \
 main.o \
 PCinterface/PCInterface.o \
+UART/uartDriver.o \
+UnitHandler/UnitHandler.o \
 RTC/rtc.o \
 sd/sdCard.o \
 SPI/SPI.o \
-UART/uart.o \
-UnitHandler.o
+X10/X10.o \
+X10/X10_modtager.o \
+X10/X10_sender.o
 
 C_DEPS +=  \
+i2c/i2c.d \
 main.d \
 PCinterface/PCInterface.d \
+UART/uartDriver.d \
+UnitHandler/UnitHandler.d \
 RTC/rtc.d \
 sd/sdCard.d \
 SPI/SPI.d \
-UART/uart.d \
-UnitHandler.d
+X10/X10.d \
+X10/X10_modtager.d \
+X10/X10_sender.d
 
 C_DEPS_AS_ARGS +=  \
+i2c/i2c.d \
 main.d \
 PCinterface/PCInterface.d \
+UART/uartDriver.d \
+UnitHandler/UnitHandler.d \
 RTC/rtc.d \
 sd/sdCard.d \
 SPI/SPI.d \
-UART/uart.d \
-UnitHandler.d
+X10/X10.d \
+X10/X10_modtager.d \
+X10/X10_sender.d
 
 OUTPUT_FILE_PATH +=simulate.elf
 
@@ -122,6 +145,21 @@ LINKER_SCRIPT_DEP+=
 
 
 
+
+
+
+
+
+
+
+
+i2c/%.o: ../i2c/%.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 4.9.2
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.0.90\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.0.90\gcc\dev\atmega2560" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 ./%.o: .././%.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 4.9.2
@@ -130,6 +168,20 @@ LINKER_SCRIPT_DEP+=
 	
 
 PCinterface/%.o: ../PCinterface/%.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 4.9.2
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.0.90\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.0.90\gcc\dev\atmega2560" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+UART/%.o: ../UART/%.cpp
+	@echo Building file: $<
+	@echo Invoking: AVR8/GNU C Compiler : 4.9.2
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.0.90\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.0.90\gcc\dev\atmega2560" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+UnitHandler/%.o: ../UnitHandler/%.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 4.9.2
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.0.90\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.0.90\gcc\dev\atmega2560" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -157,7 +209,7 @@ SPI/%.o: ../SPI/%.cpp
 	@echo Finished building: $<
 	
 
-UART/%.o: ../UART/%.cpp
+X10/%.o: ../X10/%.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 4.9.2
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.0.90\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.0.90\gcc\dev\atmega2560" -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

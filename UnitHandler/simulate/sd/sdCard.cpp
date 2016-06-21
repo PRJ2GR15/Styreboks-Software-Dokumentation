@@ -180,7 +180,7 @@ bool sdCard::init()
 	
 }
 
-unsigned char sdCard::readBlock( unsigned long adress, unsigned char outputdata[] )
+bool sdCard::readBlock( unsigned long adress, unsigned char outputdata[] )
 {
 	unsigned char *argument_byte_pointer = (unsigned char*)&adress;
 	spi_obj.writeByte(0xFF); // clock sync

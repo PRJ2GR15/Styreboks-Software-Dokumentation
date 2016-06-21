@@ -13,9 +13,9 @@
 #ifndef UNITHANDLER_H_
 #define UNITHANDLER_H_
 
-#include "sd/sdCard.h"
+#include "../sd/sdCard.h"
 
-#include "UART/uart.h"
+#include "../UART/uartdriver.h"
 //=====================================
 // CLASS : UnitHandler
 // DESCR : handles units, rooms, and unit-timetables.

@@ -143,6 +143,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="i2c\i2c.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="i2c\i2c.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.cpp">
       <SubType>compile</SubType>
     </Compile>
@@ -202,6 +208,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="i2c\" />
     <Folder Include="PCinterface" />
     <Folder Include="X10" />
     <Folder Include="UnitHandler" />

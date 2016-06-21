@@ -38,8 +38,7 @@ unsigned char day;
 unsigned char hour;
 unsigned char minute;
 
-unsigned char Array[512] = {0x00};
-unsigned char schedule[512] = {0x00};	
+
 	
 int main(void)
 {
@@ -57,6 +56,9 @@ int main(void)
 		//If PC is not connected.
 		case false:
 		
+			unsigned char Array[512] = {0x00};
+			unsigned char schedule[512] = {0x00};
+		
 			unitCount = handler_obj.getUnitCount();
 			day = RTC_obj.getDayOfWeek();
 			
@@ -65,7 +67,7 @@ int main(void)
 			handler_obj.getUnitList(Array);
 			
 			//Search through the array for unitID´s 
-			for (int i = 0, i <= 511, i++)
+			for (int i = 0; i <= 511; i++)
 			{
 				if (Array[1] % 2 == 0)
 				{
@@ -86,7 +88,7 @@ int main(void)
 						}
 					}					
 				}				
-			}
+			}			
 			break;	
 	}	
 }

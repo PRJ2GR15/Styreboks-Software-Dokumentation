@@ -15,7 +15,7 @@
 
 #ifndef SDCARD_H_
 #define SDCARD_H_
-#define F_CPU 16000000
+/*#define F_CPU 16000000*/
 #define PORT_SD PORTB // set output PORT for the sd card
 #define PIN_SD PINB  // used to read to port for handling the SS pin when needed.
 // helper type to make it easier to handle commands.
