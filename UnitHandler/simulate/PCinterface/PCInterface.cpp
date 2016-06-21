@@ -319,5 +319,6 @@ void PCinterface::returnStatus(){
 		// currently just sets status to false
 			uartPointer->sendChar(0xFA);
 		}
+		needRunGetStatus = false;
 	}
 }
