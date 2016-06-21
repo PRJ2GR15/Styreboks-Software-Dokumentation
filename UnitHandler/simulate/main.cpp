@@ -8,88 +8,115 @@
 //
 // REV - DATE - AUTHOR - CHANGE DESCRIPTION
 // 1.0 27-05-2016/Stefan Nielsen Created project.
+// 1.1 21/06-2016 Stefan Nielsen Updated project to switch case layout.
 //========================================================================
+
+
+
+#define F_CPU 16000000
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include "Uart/uart.h"
+#include "UART/uartdriver.h"
 #include "SD/sdCard.h"
-#include "UnitHandler.h"
+#include "UnitHandler/UnitHandler.h"
 #include "PCinterface/PCinterface.h"
 #include "RTC/rtc.h"
-#include "X10_modtager.h"
-#include "X10_sender.h"
+#include "X10/X10.h"
 
 
+UART uart_obj(57600, 8, 'E');
+sdCard SD_obj(4000);
+rtc RTC_obj(0xD0, 400);
+UnitHandler handler_obj(&SD_obj);
+X10 X10_obj(0x00, 0x00);
+PCinterface PCIF_obj(&handler_obj ,&uart_obj, &RTC_obj, &X10_obj);
+
+int error_count = 0;
+int unitCount;
+unsigned char day;
+unsigned char hour;
+unsigned char minute;
+
+unsigned char Array[512] = {0x00};
+unsigned char schedule[512] = {0x00};	
+	
 int main(void)
 {
-	while (1) 
-    {
-		int error_count = 0;
+	//State-Machine implementation
+	switch (PCIF_obj.PCconnectionStatus)
+	{
 		
-		unsigned char Array;
-		UnitHandler.getUnitList(Array);
-		
-		int unitCount = UnitHandler.getUnitCount();
-		unsigned char day = rtc.getDayOfWeek();
-		unsigned char hour = rtc.getHours();
-		unsigned char minute = rtc.getMinuts();
-		
-		unsigned char data;
-		unsigned char type;
-		bool validity;
-		unsigned char status;
+		//If PC is connected.
+		case true:
+			PCIF_obj.returnStatus();
+			break;
 		
 		
 		
-		// Forsøg på et main program, bygget ud fra Christians anvisninger, om hvordan x10 klassen virker...
+		//If PC is not connected.
+		case false:
 		
-		for (int i = 0; i <= unitCount; i++)
-		{
-			if (i % 2 == 1 && Array[i] != 0x00)
+			unitCount = handler_obj.getUnitCount();
+			day = RTC_obj.getDayOfWeek();
+			
+				
+			//Get list of units
+			handler_obj.getUnitList(Array);
+			
+			//Search through the array for unitID´s 
+			for (int i = 0, i <= 511, i++)
 			{
-				unsigned long blockAddress = ((2 + ((Array[i] - 1) * 7)) + day);
-				sdCard.readBlock(blockAddress);
-				
-				
-				for (int x = 5; x <= 511; x += 4)
+				if (Array[1] % 2 == 0)
 				{
-					if (Array[x] == hour)
+					handler_obj.getTimeTable(day, Array[i], schedule);
+					
+					if (schedule[5] == RTC_obj.getHours())
 					{
-						if (Array[x + 1] == minute)
+						if (schedule[6] == RTC_obj.getMinuts())
 						{
-							X10_sender.sendCommand(0x01, Array[1], 0x00);
-							while(!X10_modtager.dataReady_)
-							{}		
 							
-							X10_modtager.fetchData(type, data, validity);													
-							
-							
-							if (type == 0x01 && validity == true)
+							bool handling = false;
+							if (schedule[7] =! 0)
 							{
-								status == data;
-								
-								if (status == Array[x + 2])
-								{}
-								else
-								{
-									X10_sender.sendCommand(0x01, Array[1], 0x02, Array[x + 2]);
-									while(!X10_modtager.dataReady_)
-									{}
-									
-									X10_modtager.fetchData(type, data, validity);
-									
-									if (type == 0x05 && validity == false)
-									{
-										error_count++;
-									}
-								}
+								handling = true;
 							}
+							
+							X10_obj.switchState(Array[i], handling);							
 						}
-					}
-				}
-			}
-		}
-    }
+					}					
+				}				
+			}	
+	}	
+}
+
+
+
+
+ISR (USART0_RX_vect) // interrupt based uart
+{
+	PCIF_obj.handleCMD();
+}
+
+// interrupts used by x10.h
+ISR(INT2_vect) // used for X10.h
+{
+	X10_obj.reciveSendHighInterupt();
+}
+ISR(INT3_vect) // used for x10.h
+{
+	X10_obj.reciveSendLowInterupt();
+}
+ISR(TIMER0_OVF_vect)
+{
+	X10_obj.stop120Interupt();
+}
+ISR(TIMER3_OVF_vect)
+{
+	X10_obj.resetReciverInterupt();
+}
+ISR(TIMER2_OVF_vect)
+{
+	X10_obj.inputCompleteInterupt();
 }
 

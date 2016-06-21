@@ -150,22 +150,9 @@ bool PCinterface::handleCMD()
 					// ignorer
 					break;
 		case 5: // Anmod om enhedsstatus 1 byte: enhedsadresse;
-					if(getData(datablock) == 1){ // try to read a data part of uart communication 
-						if(x10Pointer->getUnitStatus(datablock[0], unitstatus)) // get status from unit and store it into unitstatus
-						{
-							if(unitstatus == true){ // return true response
-								uartPointer->sendChar(0x01);
-							}
-							else // handles false
-							{
-								uartPointer->sendChar(0x00);
-							}
-						}
-						else {
-							// location for adding error handling
-							// currently just sets status to false
-							uartPointer->sendChar(0x00);
-						}
+					if(getData(datablock) == 1){ // try to read a data part of uart communication
+						unitAdress = datablock[0];
+						needRunGetStatus = true;
 					}
 					else {
 						uartPointer->sendChar(0x00); // in case no data is read. should have some kind of better  error handling here.
@@ -313,7 +300,24 @@ bool PCinterface::handleCMD()
 	}
 }
 
-
-
-
-
+void PCinterface::returnStatus(){
+	if(needRunGetStatus){
+		if(x10Pointer->getUnitStatus(unitAdress, currentUnitStatus)) // get status from unit and store it into unitstatus
+		{
+			if(currentUnitStatus == true)
+			{ // return true response
+				uartPointer->sendChar(0x01);
+			}
+			else // handles false
+			{
+				uartPointer->sendChar(0x00);
+			}
+		}
+		else 
+		{
+		// location for adding error handling
+		// currently just sets status to false
+			uartPointer->sendChar(0xFA);
+		}
+	}
+}

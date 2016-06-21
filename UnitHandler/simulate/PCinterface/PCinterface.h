@@ -12,7 +12,7 @@
 
 #ifndef PCINTERFACE_H_
 #define PCINTERFACE_H_
-#include "../Uart/uartDriver.h"s
+#include "../Uart/uartDriver.h"
 #include "../RTC/rtc.h"
 #include "../UnitHandler/UnitHandler.h"
 #include "../X10/X10.h"
@@ -31,11 +31,15 @@ public:
 	bool handleCMD();
 	bool setTime();
 	bool PCconnectionStatus;
+	void returnStatus();
 private:
 	rtc * rtc_obj_pointer;
 	UnitHandler * UnitHandlerPointer;
 	UART * uartPointer;
 	X10 * x10Pointer;
+	bool needRunGetStatus;
+	unsigned char unitAdress;
+	bool currentUnitStatus;
 };
 
 
