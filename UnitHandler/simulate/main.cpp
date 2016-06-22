@@ -39,9 +39,16 @@ unsigned char hour;
 unsigned char minute;
 
 
-	
-int main(void)
+int main()
 {
+	
+	//Bruges som test program.
+	RTC_obj.setDate(22, 06, 16, 3);
+	RTC_obj.setTime(12, 00, 00);
+	DDRF = 0xFF;
+	
+	
+	
 	//State-Machine implementation
 	switch (PCIF_obj.PCconnectionStatus)
 	{
@@ -84,7 +91,20 @@ int main(void)
 								handling = true;
 							}
 							
-							X10_obj.switchState(Array[i], handling);							
+							
+							
+							//Bruges til test...
+							if (handling == true)
+							{
+								PORTF = 0xFF;
+							}
+							else
+							{
+								PORTF = 0x00;
+							}
+							
+							//Bruges ikke i test...
+							//X10_obj.switchState(Array[i], handling);							
 						}
 					}					
 				}				
