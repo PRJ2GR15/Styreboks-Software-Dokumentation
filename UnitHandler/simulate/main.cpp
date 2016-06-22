@@ -32,15 +32,16 @@ UnitHandler handler_obj(&SD_obj);
 X10 X10_obj(0x00, 0x00);
 PCinterface PCIF_obj(&handler_obj ,&uart_obj, &RTC_obj, &X10_obj);
 
-int error_count = 0;
+
 int unitCount;
 unsigned char day;
-unsigned char hour;
-unsigned char minute;
 
 
 int main()
 {
+	
+	sei();
+	SD_obj.init();
 	
 	//Bruges som test program.
 	RTC_obj.setDate(22, 06, 16, 3);
@@ -48,68 +49,76 @@ int main()
 	DDRF = 0xFF;
 	
 	
-	
-	//State-Machine implementation
-	switch (PCIF_obj.PCconnectionStatus)
+	while (1)
 	{
+
+		//State-Machine implementation
+		switch (PCIF_obj.PCconnectionStatus)
+		{
 		
-		//If PC is connected.
-		case true:
-			PCIF_obj.returnStatus();
-			break;
+			//If PC is connected.
+			case true:
+				PCIF_obj.returnStatus();
+				break;
 		
 		
 		
-		//If PC is not connected.
-		case false:
+			//If PC is not connected.
+			case false:
 		
-			unsigned char Array[512] = {0x00};
-			unsigned char schedule[512] = {0x00};
+				unsigned char Array[512] = {0x00};
+				unsigned char schedule[512] = {0x00};
 		
-			unitCount = handler_obj.getUnitCount();
-			day = RTC_obj.getDayOfWeek();
+				unitCount = handler_obj.getUnitCount();
+				day = RTC_obj.getDayOfWeek();
 			
 				
-			//Get list of units
-			handler_obj.getUnitList(Array);
+				//Get list of units
+				handler_obj.getUnitList(Array);
 			
-			//Search through the array for unitID´s 
-			for (int i = 0; i <= 511; i++)
-			{
-				if (Array[1] % 2 == 0)
+				//Search through the array for unitID´s 
+				for (int i = 0; i <= 511; i++)
 				{
-					handler_obj.getTimeTable(day, Array[i], schedule);
-					
-					if (schedule[5] == RTC_obj.getHours())
+					if (Array[i] % 2 != 0)
 					{
-						if (schedule[6] == RTC_obj.getMinuts())
+						handler_obj.getTimeTable(day, Array[i - 1], schedule);
+					
+						
+						for (int j = 5; j<= 511; j += 3)
 						{
-							
-							bool handling = false;
-							if (schedule[7] =! 0)
+							if (schedule[j] == RTC_obj.getHours())
 							{
-								handling = true;
+							
+								if (schedule[j + 1] == RTC_obj.getMinuts())
+								{
+							
+									bool handling = false;
+									if (schedule[j + 2] =! 0)
+									{
+										handling = true;
+									}
+							
+							
+							
+									//Bruges til test...
+									if (handling == true)
+									{
+										PORTF = 0xFF;
+									}
+									else
+									{
+										PORTF = 0x00;
+									}
+							
+									//Bruges ikke i test...
+									//X10_obj.switchState(Array[i], handling);							
+								}
 							}
-							
-							
-							
-							//Bruges til test...
-							if (handling == true)
-							{
-								PORTF = 0xFF;
-							}
-							else
-							{
-								PORTF = 0x00;
-							}
-							
-							//Bruges ikke i test...
-							//X10_obj.switchState(Array[i], handling);							
 						}
-					}					
-				}				
-			}			
-			break;	
+					}				
+				}			
+				break;
+		}
 	}	
 }
 
@@ -119,27 +128,33 @@ int main()
 ISR (USART0_RX_vect) // interrupt based uart
 {
 	PCIF_obj.handleCMD();
+	sei();
 }
 
 // interrupts used by x10.h
 ISR(INT2_vect) // used for X10.h
 {
 	X10_obj.reciveSendHighInterupt();
+	sei();
 }
 ISR(INT3_vect) // used for x10.h
 {
 	X10_obj.reciveSendLowInterupt();
+	sei();
 }
 ISR(TIMER0_OVF_vect)
 {
 	X10_obj.stop120Interupt();
+	sei();
 }
 ISR(TIMER3_OVF_vect)
 {
 	X10_obj.resetReciverInterupt();
+	sei();
 }
 ISR(TIMER2_OVF_vect)
 {
 	X10_obj.inputCompleteInterupt();
+	sei();
 }
 
