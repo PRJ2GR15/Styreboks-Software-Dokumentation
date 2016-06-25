@@ -23,6 +23,7 @@ public:
 	bool getUnitStatus(unsigned char unitID, bool& status);
 	bool switchState(unsigned char unitID, bool newStatus);
 	void recieveData();
+	bool getSendMode();
 	
 	//Interupts
 	void reciveSendHighInterupt(); //INT2_vect

@@ -25,7 +25,7 @@
  SPI::SPI( int freq )
 {
 	// only using master mode in the project so slave mode is not part of this SPI driver.
-	DDRB = 0b00000111; // sets MOSI as output and SCK as output rest as input on port B.
+	DDRB = 0b00010111; // sets MOSI as output and SCK as output rest as input on port B.
 	SPCR = 0b01010000; // enable SPI and set mode to master
 	setFreq(freq);
 }

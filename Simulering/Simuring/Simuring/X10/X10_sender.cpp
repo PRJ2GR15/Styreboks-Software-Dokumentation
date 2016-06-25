@@ -131,12 +131,12 @@ void X10_sender::sendCommand(unsigned char houseCode, unsigned char adress, unsi
 	tempPacketData1 |= startBit_;
 	
 	tempPacketData1 = tempPacketData1 << 4;
-	tempPacketData1 |= houseCode;
+	tempPacketData1 |= (houseCode & 0b1111);
 	
 	tempPacketData1 = tempPacketData1 << 8;
-	tempPacketData1 |= adress;
+	tempPacketData1 |= (adress & 0b11111111);
 	
-	tempPacketData2 |= type;
+	tempPacketData2 |= (type & 0b111);
 	
 	if(type == 0b000 || type == 0b011 || type == 0b100)
 	{
@@ -146,7 +146,7 @@ void X10_sender::sendCommand(unsigned char houseCode, unsigned char adress, unsi
 	else if(type == 0b001 || type == 0b010)
 	{
 		tempPacketData2 = tempPacketData2 << 1;
-		tempPacketData2 |= data;
+		tempPacketData2 |= (data & 0b1);
 				
 		tempPacketSize = 10;
 	}
@@ -154,7 +154,7 @@ void X10_sender::sendCommand(unsigned char houseCode, unsigned char adress, unsi
 	else if(type == 0b110 || type == 0b101)
 	{
 		tempPacketData2 = tempPacketData2 << 2;
-		tempPacketData2 |= data;
+		tempPacketData2 |= (data & 0b11);
 	
 		tempPacketSize = 11;
 	}
@@ -277,25 +277,19 @@ unsigned char X10_sender::generateParity(unsigned int packet1, unsigned int pack
 //=============================================================
 void X10_sender::sendHigh()
 {
-	if(getSendMode() == true)
+	if(getCurrentPacket() == 1)
 	{
-		//PORTB |= 1 << 1;
-		if(getCurrentPacket() == 1)
+		if(getPacket1() & (1 << getCurrentPos1()))
 		{
-			if(getPacket1() & (1 << getCurrentPos1()))
-			{
-				start120();
-				
-				if(getCurrentPos1() > 0)
+			start120();
+			
+			if(getCurrentPos1() > 0)
 				decrementCurrentPos1();
-				else
-				setCurrentPacket(2);
-				
-				//PORTB |= 1 << 2;
-			}
-		else{}
+			else
+				setCurrentPacket(2);				
+		}		
 	}
-	
+
 	else if(getCurrentPacket() == 2)
 	{
 		if(getPacket2() & (1 << getCurrentPos2()))
@@ -311,14 +305,11 @@ void X10_sender::sendHigh()
 				setSendMode(false);
 				setCurrentPacket(0);
 			}
-			
-			//PORTB |= 1 << 2;
 		}
+	}		
 	else{}
 }
-		else{}
-	}
-}
+
 
 //=============================================================
 // METHOD : sendLow
@@ -326,23 +317,17 @@ void X10_sender::sendHigh()
 //=============================================================
 void X10_sender::sendLow()
 {
-	//PORTB &= ~(3 << 1);
-	if(getSendMode() == true)
+	if(getCurrentPacket() == 1)
 	{
-		if(getCurrentPacket() == 1)
+		if(~getPacket1() & (1 << getCurrentPos1()))
 		{
-			//PORTB |= 1 << 3;
-			if(~getPacket1() & (1 << getCurrentPos1()))
-			{
-				start120();
-				
-				if(getCurrentPos1() > 0)
-				decrementCurrentPos1();
-				else
-				setCurrentPacket(2);
-				//PORTB |= 1 << 4;
-			}
-		else{}
+			start120();
+			
+			if(getCurrentPos1() > 0)
+			decrementCurrentPos1();
+			else
+			setCurrentPacket(2);
+		}
 	}
 	
 	else if(getCurrentPacket() == 2)
@@ -360,11 +345,7 @@ void X10_sender::sendLow()
 				setSendMode(false);
 				setCurrentPacket(0);
 			}
-			
-			//PORTB |= 1 << 4;
 		}
+	}		
 	else{}
-}
-		else{}	
-	}
 }

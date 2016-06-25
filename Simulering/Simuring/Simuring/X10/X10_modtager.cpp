@@ -147,9 +147,9 @@ unsigned char X10_modtager::getPacketType()
 unsigned char X10_modtager::getPacketData()
 {
 	if(numberOfData_ == 1)
-		return ((packet2_ >> 7) & 1);
+		return ((packet2_ >> 6) & 0b1);
 	else if(numberOfData_ == 2)
-		return ((packet2_ >> 7) & 3);
+		return ((packet2_ >> 6) & 0b11);
 	else
 		return 0;
 }
@@ -208,12 +208,11 @@ bool X10_modtager::validatePackets()
 //=============================================================
 void X10_modtager::receiveData(unsigned char data)
 {	
-// 	if(currentPos1_ == 0)
-// 		startTimout();
-// 	else
-// 		resetTimout();
-		
-	
+	if(currentPos1_ == 0)
+		startTimout();
+	else
+		resetTimout();
+
 	if(notReciving_ == false)
 	{
 		if(currentPacket_ == 1)
@@ -270,7 +269,7 @@ void X10_modtager::receiveData(unsigned char data)
 		else if(currentPacket_ == 0)
 		{
 			TCCR3B &= ~(1 << CS31); //stop timeout
-			data_ = getPacketData();
+			data_ = getPacketData();		
 			packetValidity_ = validatePackets();
 			dataReady_ = true;
 		}
@@ -356,7 +355,6 @@ void X10_modtager::receiveHigh()
 	bool recived = false;
 	while((TIFR2 & (1 << TOV2)) == 0 && recived == false)
 	{
-		
 		if((PINH & (1 << PINH6)) != 0)
 		{
 			recived = true;

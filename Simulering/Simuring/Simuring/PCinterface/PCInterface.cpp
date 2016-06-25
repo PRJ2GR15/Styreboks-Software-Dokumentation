@@ -115,7 +115,7 @@ unsigned int PCinterface::getData( unsigned char data[] ) // array must be 512 b
 //=============================================================
 bool PCinterface::handleCMD()
 {
-	DDRA = 0x00000000;
+	DDRA = 0b00000000;
 	unsigned char datablock[512];
 	for ( int i = 0; i<512; i++) {
 		datablock[i] = 0x00;
@@ -138,7 +138,7 @@ bool PCinterface::handleCMD()
 		case 2: // PC frakoblet 0 bytes data;
 					// sæt register i main ( PC bit low)
 					PCconnectionStatus = false; // set Connection status flag to false
-					uartPointer->sendChar(0x0F); // reply to PC
+					//uartPointer->sendChar(0x0F); // reply to PC
 					break;
 		case 3: // tjek kode 0 bytes data;
 				// tjek kode pin ( low = korrekt kode) og returner til PC hvad resultatet er.
@@ -331,7 +331,7 @@ void PCinterface::returnStatus(){
 		{
 		// location for adding error handling
 		// currently just sets status to false
-			uartPointer->sendChar(0xFA);
+			//uartPointer->sendChar(0xFA);
 		}
 		needRunGetStatus = false;
 	}

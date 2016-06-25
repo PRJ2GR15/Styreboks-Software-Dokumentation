@@ -40,15 +40,15 @@ unsigned char day;
 int main()
 {
 	
-	sei();
+	
 	SD_obj.init();
 	
 	//Bruges som test program.
 	RTC_obj.setDate(22, 06, 16, 3);
 	RTC_obj.setTime(12, 00, 00);
-	DDRF = 0xFF;
-	
-	
+	//DDRF = 0xFF;
+	DDRH = 0x00;
+	sei();
 	while (1)
 	{
 
@@ -65,7 +65,7 @@ int main()
 		
 			//If PC is not connected.
 			case false:
-		
+				
 				unsigned char Array[512] = {0x00};
 				unsigned char schedule[512] = {0x00};
 		
@@ -95,18 +95,21 @@ int main()
 									handling = schedule[j+2];			
 								
 									//Bruges til test...
-									if (handling == true)
-									{
-										PORTF = 0xFF;
-									}
-									else
-									{
-										PORTF = 0x00;
-									}
+									//if (handling == true)
+									//{
+									//	PORTF = 0xFF;
+									//}
+									//else
+									//{
+									//	PORTF = 0x00;
+									//}
 							
 									//Bruges ikke i test...
 									// men skal bruges i demo.
-									//X10_obj.switchState(Array[i-1], handling);							
+									
+									if(X10_obj.getSendMode() != true){
+										X10_obj.switchState(Array[i-1], handling);	
+									}															
 								}
 							}
 						}
@@ -123,33 +126,33 @@ int main()
 ISR (USART0_RX_vect) // interrupt based uart
 {
 	PCIF_obj.handleCMD();
-	sei();
+	
 }
 
 // interrupts used by x10.h
 ISR(INT2_vect) // used for X10.h
 {
 	X10_obj.reciveSendHighInterupt();
-	sei();
+	
 }
 ISR(INT3_vect) // used for x10.h
 {
 	X10_obj.reciveSendLowInterupt();
-	sei();
+	
 }
 ISR(TIMER0_OVF_vect)
 {
 	X10_obj.stop120Interupt();
-	sei();
+	
 }
 ISR(TIMER3_OVF_vect)
 {
 	X10_obj.resetReciverInterupt();
-	sei();
+	
 }
 ISR(TIMER2_OVF_vect)
 {
 	X10_obj.inputCompleteInterupt();
-	sei();
+	
 }
 

@@ -8,6 +8,7 @@
 
 #include "X10.h"
 #include <avr/io.h>
+#include <avr/interrupt.h>
 
 
 //=============================================================
@@ -17,9 +18,22 @@
 X10::X10(unsigned char houseCode, unsigned char adress) : modtager_(houseCode, adress)
 {
 	houseCode_ = houseCode;
-	unitStatus_ = false;
+	unitStatus_ = true;
 	//timer
 	TCNT4 = 34286;
+	
+	
+	//int 2
+	EIMSK |= (1 << INT2);
+	EICRA |= (1 << ISC21);
+	EICRA |= (1 << ISC20);
+	
+	//int 3
+	EIMSK |= (1 << INT3);
+	EICRA |= (1 << ISC31);
+	
+	//if(adress != 0)
+	//	switchLight(unitStatus_);
 	
 	
 }
@@ -32,22 +46,26 @@ bool X10::getUnitStatus(unsigned char unitID, bool& status)
 {
 	sender_.sendCommand(houseCode_, unitID, 0b000);
 	
+	while(getSendMode() == true){}
+	
 	TCCR4B |= (1 << CS42) | (1 << CS40); //start timer
 	
-	while(modtager_.isDataReady() != false)
+	while(modtager_.isDataReady() != true)
 	{
 		if(TIFR4 & (1 << TOV4))
 		{
 			TIFR4 |= (1 << TOV4); //stop timer
 			TCCR4B &= ~((1 << CS42) | (1 << CS40));
 			TCNT4 = 34286;
+			//PORTB |= (1 << PINB6);
 			return false;
 		}
 	}
 	TCCR4B &= ~((1 << CS42) | (1 << CS40)); //stop timer
 	TCNT4 = 34286;
 	
-	unsigned char type, data;
+	unsigned char type;
+	unsigned char data;
 	bool vali;
 	modtager_.fetchData(type, data, vali);
 	if(vali == false)
@@ -80,24 +98,35 @@ bool X10::getUnitStatus(unsigned char unitID, bool& status)
 //=============================================================
 bool X10::switchState(unsigned char unitID, bool newStatus)
 {
-	sender_.sendCommand(houseCode_, unitID, 0b010, (newStatus == true ? 0b1 : 0b0));
+	if(newStatus == true)
+	{
+		sender_.sendCommand(houseCode_, unitID, 0b010, 0b1);
+	}
+	else
+	{
+		sender_.sendCommand(houseCode_, unitID, 0b010, 0b0);
+	}
+	
+	while(getSendMode() == true){}
 	
 	TCCR4B |= (1 << CS42) | (1 << CS40); //start timer
 	
-	while(modtager_.isDataReady() != false)
+	while(modtager_.isDataReady() != true)
 	{
 		if(TIFR4 & (1 << TOV4))
 		{
 			TIFR4 |= (1 << TOV4); //stop timer
 			TCCR4B &= ~((1 << CS42) | (1 << CS40));
 			TCNT4 = 34286;
+			//PORTB |= (1 << PINB6);
 			return false;
 		}
 	}
 	TCCR4B &= ~((1 << CS42) | (1 << CS40)); //stop timer
 	TCNT4 = 34286;
 	
-	unsigned char type, data;
+	unsigned char type;
+	unsigned char data;
 	bool vali;
 	modtager_.fetchData(type, data, vali);
 	if(vali == false)
@@ -105,7 +134,7 @@ bool X10::switchState(unsigned char unitID, bool newStatus)
 		
 	else
 	{
-		if(type == 0b101)
+		if(type == 0b011)
 			return true;	
 							
 		else
@@ -119,7 +148,11 @@ bool X10::switchState(unsigned char unitID, bool newStatus)
 //=============================================================
 void X10::replyStatus(bool status)
 {
-	sender_.sendCommand(houseCode_, 0, 0b001, (status == true ? 0b1 : 0b0));
+	if (status == true)
+		sender_.sendCommand(houseCode_, 0, 0b001, 0b1);
+		
+	else
+		sender_.sendCommand(houseCode_, 0, 0b001, 0b0);
 }
 
 //=============================================================
@@ -128,7 +161,7 @@ void X10::replyStatus(bool status)
 //=============================================================
 void X10::replyOk()
 {
-	sender_.sendCommand(houseCode_, 0, 0b101);
+	sender_.sendCommand(houseCode_, 0, 0b011);
 }
 
 //=============================================================
@@ -145,7 +178,7 @@ void X10::recieveData()
 		modtager_.fetchData(type, data, vali);
 		if(vali == false)
 		{
-			sender_.sendCommand(houseCode_, 0, 111, 0b00);
+			//sender_.sendCommand(houseCode_, 0, 0b111, 0b00);
 		}			
 		else
 		{
@@ -155,11 +188,21 @@ void X10::recieveData()
 			}
 			else if(type == 0b010)
 			{
-				switchLight((data == 0b0 ? false : true));
+				if(data == 0)
+				{
+					unitStatus_ = false;
+				}
+				else
+				{
+					unitStatus_ = true;
+				}
+				switchLight(unitStatus_);
 				replyOk();
 			}
 			else
-				sender_.sendCommand(houseCode_, 0, 111, 0b01);
+			{
+				//sender_.sendCommand(houseCode_, 0, 0b111, 0b01);
+			}
 		}
 	}
 	else{}
@@ -171,7 +214,25 @@ void X10::recieveData()
 //=============================================================
 void X10::switchLight(bool newState)
 {
-	//dummy
+	if(newState == true)
+	{
+			PORTB |= (1 << PINB3);
+			PORTB &= ~(1 << PINB2);
+	}
+	else
+	{
+			PORTB |= (1 << PINB2);
+			PORTB &= ~(1 << PINB3);
+	}
+}
+
+//=============================================================
+// METHOD :
+// DESCR. :
+//=============================================================
+bool X10::getSendMode()
+{
+	return sender_.getSendMode();
 }
 
 //=============================================================
@@ -180,7 +241,7 @@ void X10::switchLight(bool newState)
 //=============================================================
 void X10::reciveSendHighInterupt()
 {
-	if(sender_.getSendMode())
+	if(getSendMode() == true)
 		sender_.sendHigh();
 	else
 		modtager_.receiveHigh();
@@ -192,7 +253,7 @@ void X10::reciveSendHighInterupt()
 //=============================================================
 void X10::reciveSendLowInterupt()
 {
-	if(sender_.getSendMode())
+	if(sender_.getSendMode() == true)
 		sender_.sendLow();
 	else
 		modtager_.receiveLow();
@@ -214,7 +275,6 @@ void X10::stop120Interupt()
 void X10::resetReciverInterupt()
 {
 	modtager_.resetReceiver();
-	PORTB |= 1;
 }
 
 //=============================================================

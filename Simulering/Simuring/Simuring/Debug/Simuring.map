@@ -146,7 +146,7 @@ LOAD c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x32f0
+.text           0x00000000     0x3348
  *(.vectors)
  .vectors       0x00000000       0xe4 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/../../../../avr/lib/avr6/crtm2560.o
                 0x00000000                __vector_default
@@ -263,167 +263,168 @@ LOAD c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1
                 0x000001a4                i2c::stop()
                 0x000001ac                i2c::write(unsigned char)
                 0x000001c2                i2c::read(bool)
- .text          0x000001e4      0x452 main.o
+ .text          0x000001e4      0x450 main.o
                 0x000001e4                main
-                0x000003a4                __vector_25
-                0x000003fa                __vector_3
-                0x00000450                __vector_4
-                0x000004a6                __vector_23
-                0x000004fc                __vector_35
+                0x000003ae                __vector_25
+                0x00000402                __vector_3
+                0x00000456                __vector_4
+                0x000004aa                __vector_23
+                0x000004fe                __vector_35
                 0x00000552                __vector_15
- .text          0x00000636      0x5f0 PCinterface/PCInterface.o
-                0x00000636                PCinterface::PCinterface(UnitHandler*, UART*, rtc*, X10*)
-                0x00000636                PCinterface::PCinterface(UnitHandler*, UART*, rtc*, X10*)
-                0x00000656                PCinterface::isStart(unsigned char*)
-                0x00000698                PCinterface::getCmd(unsigned char*)
-                0x000006c2                PCinterface::getData(unsigned char*)
-                0x0000075e                PCinterface::handleCMD()
-                0x00000bd6                PCinterface::returnStatus()
- .text          0x00000c26      0x410 RTC/rtc.o
-                0x00000c26                rtc::rtc(unsigned char, int)
-                0x00000c26                rtc::rtc(unsigned char, int)
-                0x00000c42                rtc::getDayOfWeek()
-                0x00000ca0                rtc::intToBCD(unsigned char)
-                0x00000cb0                rtc::setDate(unsigned char, unsigned char, unsigned char, unsigned char)
-                0x00000d36                rtc::setTime(unsigned char, unsigned char, unsigned char)
-                0x00000db2                rtc::bcdToInt(unsigned char)
-                0x00000dce                rtc::getYear()
-                0x00000e34                rtc::getMonth()
-                0x00000e9a                rtc::getDate()
-                0x00000f00                rtc::GetSeconds()
-                0x00000f66                rtc::getMinuts()
-                0x00000fcc                rtc::getHours()
- .text          0x00001036      0x65a sd/sdCard.o
-                0x00001036                sdCard::sdCard(int)
-                0x00001036                sdCard::sdCard(int)
-                0x00001058                sdCard::sendCommand(unsigned char, unsigned long, unsigned char)
-                0x000010d4                sdCard::getResponeByte()
-                0x000010da                sdCard::writeByte(unsigned char)
-                0x000010e0                sdCard::init()
-                0x00001410                sdCard::readBlock(unsigned long, unsigned char*)
-                0x00001500                sdCard::writeBlock(unsigned long, unsigned char const*)
- .text          0x00001690       0x78 SPI/SPI.o
-                0x00001690                SPI::setFreq(int)
-                0x000016e0                SPI::SPI(int)
-                0x000016e0                SPI::SPI(int)
-                0x000016ee                SPI::writeByte(unsigned char)
-                0x000016fa                SPI::recieveByte()
- .text          0x00001708      0x144 UART/uartDriver.o
-                0x00001708                UART::UART(unsigned long, unsigned char, char)
-                0x00001708                UART::UART(unsigned long, unsigned char, char)
-                0x000017ae                UART::charReady()
-                0x000017b6                UART::readChar()
-                0x000017c6                UART::sendChar(char)
-                0x000017d6                UART::sendString(char*)
-                0x00001800                UART::sendInteger(int)
- .text          0x0000184c      0xeac UnitHandler/UnitHandler.o
-                0x0000184c                UnitHandler::UnitHandler(sdCard*)
-                0x0000184c                UnitHandler::UnitHandler(sdCard*)
-                0x00001856                UnitHandler::getUnitList(unsigned char*)
-                0x0000186a                UnitHandler::checkStdAssignment()
-                0x000018dc                UnitHandler::addUnitToList(unsigned char, unsigned char)
-                0x0000197e                UnitHandler::removeUnitFromList(unsigned char)
-                0x00001a9a                UnitHandler::searchFreeBlocks()
-                0x00001b1e                UnitHandler::getRoomList(unsigned char*)
-                0x00001b34                UnitHandler::RemoveUnit(unsigned char)
-                0x00001cd2                UnitHandler::createNewRoom(unsigned char)
-                0x00001d88                UnitHandler::addUnitToRoom(unsigned char)
-                0x00001e1e                UnitHandler::AddUnit(unsigned char, unsigned char)
-                0x00001fbc                UnitHandler::removeUnitFromRoom(unsigned char, unsigned char)
-                0x0000213c                UnitHandler::deleteRoom(unsigned char)
-                0x000022ac                UnitHandler::UpdateTime(unsigned char, unsigned char*)
-                0x000023c4                UnitHandler::getTimeTable(unsigned char, unsigned char, unsigned char*)
-                0x000024d6                UnitHandler::editUnit(unsigned char, unsigned char, unsigned char)
-                0x000026f2                UnitHandler::getUnitCount()
- .text          0x000026f8      0x312 X10/X10.o
-                0x000026f8                X10::X10(unsigned char, unsigned char)
-                0x000026f8                X10::X10(unsigned char, unsigned char)
-                0x00002728                X10::getUnitStatus(unsigned char, bool&)
-                0x00002806                X10::switchState(unsigned char, bool)
-                0x000028c0                X10::replyStatus(bool)
-                0x000028d6                X10::replyOk()
-                0x000028ec                X10::recieveData()
-                0x00002986                X10::switchLight(bool)
-                0x00002988                X10::reciveSendHighInterupt()
-                0x000029bc                X10::reciveSendLowInterupt()
-                0x000029f0                X10::stop120Interupt()
-                0x000029f8                X10::resetReciverInterupt()
-                0x00002a02                X10::inputCompleteInterupt()
- .text          0x00002a0a      0x398 X10/X10_modtager.o
-                0x00002a0a                X10_modtager::resetReceiver()
-                0x00002a36                X10_modtager::X10_modtager(unsigned char, unsigned char)
-                0x00002a36                X10_modtager::X10_modtager(unsigned char, unsigned char)
-                0x00002a50                X10_modtager::startTimout()
-                0x00002a68                X10_modtager::resetTimout()
-                0x00002a76                X10_modtager::writeDataToPacket1(unsigned char)
-                0x00002ab0                X10_modtager::writeDataToPacket2(unsigned char)
-                0x00002afa                X10_modtager::isPacketForMe()
-                0x00002b28                X10_modtager::getPacketType()
-                0x00002b30                X10_modtager::getPacketData()
-                0x00002b64                X10_modtager::isValidStart()
-                0x00002b76                X10_modtager::checkForZero(unsigned char)
-                0x00002b80                X10_modtager::validatePackets()
-                0x00002bd0                X10_modtager::receiveData(unsigned char)
-                0x00002cb6                X10_modtager::fetchData(unsigned char&, unsigned char&, bool&)
-                0x00002ce6                X10_modtager::isDataReady()
-                0x00002cec                X10_modtager::startInput()
-                0x00002cf8                X10_modtager::inputComplete()
-                0x00002d16                X10_modtager::receiveHigh()
-                0x00002d58                X10_modtager::receiveLow()
- .text          0x00002da2      0x45c X10/X10_sender.o
-                0x00002da2                X10_sender::X10_sender()
-                0x00002da2                X10_sender::X10_sender()
-                0x00002e40                X10_sender::start120()
-                0x00002e60                X10_sender::stop120()
-                0x00002e80                X10_sender::setSendMode(bool)
-                0x00002e86                X10_sender::getSendMode()
-                0x00002e8c                X10_sender::getPacket1()
-                0x00002e94                X10_sender::getPacket2()
-                0x00002e9c                X10_sender::getCurrentPacket()
-                0x00002ea2                X10_sender::setCurrentPacket(unsigned char)
-                0x00002ea8                X10_sender::decrementCurrentPos1()
-                0x00002eb2                X10_sender::getCurrentPos1()
-                0x00002eb8                X10_sender::decrementCurrentPos2()
-                0x00002ec2                X10_sender::getCurrentPos2()
-                0x00002ec8                X10_sender::generateParity(unsigned int, unsigned int)
-                0x00002f0e                X10_sender::sendCommand(unsigned char, unsigned char, unsigned char, unsigned char)
-                0x0000306e                X10_sender::sendHigh()
-                0x00003130                X10_sender::sendLow()
- .text          0x000031fe        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodqi4.o)
- .text          0x000031fe        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodsi4.o)
- .text          0x000031fe        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_exit.o)
- .text          0x000031fe        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_copy_data.o)
- .text          0x000031fe        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_clear_bss.o)
- .text          0x000031fe        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_ctors.o)
- .text          0x000031fe        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_tablejump_elpm.o)
- .text          0x000031fe        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/../../../../avr/lib/avr6\libc.a(itoa.o)
- .text          0x000031fe        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/../../../../avr/lib/avr6\libc.a(strrev.o)
- .text          0x000031fe        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodhi4.o)
-                0x000031fe                . = ALIGN (0x2)
+ .text          0x00000634      0x5da PCinterface/PCInterface.o
+                0x00000634                PCinterface::PCinterface(UnitHandler*, UART*, rtc*, X10*)
+                0x00000634                PCinterface::PCinterface(UnitHandler*, UART*, rtc*, X10*)
+                0x00000654                PCinterface::isStart(unsigned char*)
+                0x00000696                PCinterface::getCmd(unsigned char*)
+                0x000006c0                PCinterface::getData(unsigned char*)
+                0x0000075c                PCinterface::handleCMD()
+                0x00000bca                PCinterface::returnStatus()
+ .text          0x00000c0e      0x410 RTC/rtc.o
+                0x00000c0e                rtc::rtc(unsigned char, int)
+                0x00000c0e                rtc::rtc(unsigned char, int)
+                0x00000c2a                rtc::getDayOfWeek()
+                0x00000c88                rtc::intToBCD(unsigned char)
+                0x00000c98                rtc::setDate(unsigned char, unsigned char, unsigned char, unsigned char)
+                0x00000d1e                rtc::setTime(unsigned char, unsigned char, unsigned char)
+                0x00000d9a                rtc::bcdToInt(unsigned char)
+                0x00000db6                rtc::getYear()
+                0x00000e1c                rtc::getMonth()
+                0x00000e82                rtc::getDate()
+                0x00000ee8                rtc::GetSeconds()
+                0x00000f4e                rtc::getMinuts()
+                0x00000fb4                rtc::getHours()
+ .text          0x0000101e      0x65a sd/sdCard.o
+                0x0000101e                sdCard::sdCard(int)
+                0x0000101e                sdCard::sdCard(int)
+                0x00001040                sdCard::sendCommand(unsigned char, unsigned long, unsigned char)
+                0x000010bc                sdCard::getResponeByte()
+                0x000010c2                sdCard::writeByte(unsigned char)
+                0x000010c8                sdCard::init()
+                0x000013f8                sdCard::readBlock(unsigned long, unsigned char*)
+                0x000014e8                sdCard::writeBlock(unsigned long, unsigned char const*)
+ .text          0x00001678       0x78 SPI/SPI.o
+                0x00001678                SPI::setFreq(int)
+                0x000016c8                SPI::SPI(int)
+                0x000016c8                SPI::SPI(int)
+                0x000016d6                SPI::writeByte(unsigned char)
+                0x000016e2                SPI::recieveByte()
+ .text          0x000016f0      0x144 UART/uartDriver.o
+                0x000016f0                UART::UART(unsigned long, unsigned char, char)
+                0x000016f0                UART::UART(unsigned long, unsigned char, char)
+                0x00001796                UART::charReady()
+                0x0000179e                UART::readChar()
+                0x000017ae                UART::sendChar(char)
+                0x000017be                UART::sendString(char*)
+                0x000017e8                UART::sendInteger(int)
+ .text          0x00001834      0xeac UnitHandler/UnitHandler.o
+                0x00001834                UnitHandler::UnitHandler(sdCard*)
+                0x00001834                UnitHandler::UnitHandler(sdCard*)
+                0x0000183e                UnitHandler::getUnitList(unsigned char*)
+                0x00001852                UnitHandler::checkStdAssignment()
+                0x000018c4                UnitHandler::addUnitToList(unsigned char, unsigned char)
+                0x00001966                UnitHandler::removeUnitFromList(unsigned char)
+                0x00001a82                UnitHandler::searchFreeBlocks()
+                0x00001b06                UnitHandler::getRoomList(unsigned char*)
+                0x00001b1c                UnitHandler::RemoveUnit(unsigned char)
+                0x00001cba                UnitHandler::createNewRoom(unsigned char)
+                0x00001d70                UnitHandler::addUnitToRoom(unsigned char)
+                0x00001e06                UnitHandler::AddUnit(unsigned char, unsigned char)
+                0x00001fa4                UnitHandler::removeUnitFromRoom(unsigned char, unsigned char)
+                0x00002124                UnitHandler::deleteRoom(unsigned char)
+                0x00002294                UnitHandler::UpdateTime(unsigned char, unsigned char*)
+                0x000023ac                UnitHandler::getTimeTable(unsigned char, unsigned char, unsigned char*)
+                0x000024be                UnitHandler::editUnit(unsigned char, unsigned char, unsigned char)
+                0x000026da                UnitHandler::getUnitCount()
+ .text          0x000026e0      0x366 X10/X10.o
+                0x000026e0                X10::X10(unsigned char, unsigned char)
+                0x000026e0                X10::X10(unsigned char, unsigned char)
+                0x0000272c                X10::replyStatus(bool)
+                0x00002756                X10::replyOk()
+                0x0000276c                X10::switchLight(bool)
+                0x0000277c                X10::recieveData()
+                0x0000280a                X10::getSendMode()
+                0x00002812                X10::switchState(unsigned char, bool)
+                0x000028ec                X10::getUnitStatus(unsigned char, bool&)
+                0x000029d4                X10::reciveSendHighInterupt()
+                0x000029fa                X10::reciveSendLowInterupt()
+                0x00002a2e                X10::stop120Interupt()
+                0x00002a36                X10::resetReciverInterupt()
+                0x00002a3e                X10::inputCompleteInterupt()
+ .text          0x00002a46      0x3c0 X10/X10_modtager.o
+                0x00002a46                X10_modtager::resetReceiver()
+                0x00002a72                X10_modtager::X10_modtager(unsigned char, unsigned char)
+                0x00002a72                X10_modtager::X10_modtager(unsigned char, unsigned char)
+                0x00002a8c                X10_modtager::startTimout()
+                0x00002aa4                X10_modtager::resetTimout()
+                0x00002ab2                X10_modtager::writeDataToPacket1(unsigned char)
+                0x00002aec                X10_modtager::writeDataToPacket2(unsigned char)
+                0x00002b36                X10_modtager::isPacketForMe()
+                0x00002b64                X10_modtager::getPacketType()
+                0x00002b6c                X10_modtager::getPacketData()
+                0x00002bb0                X10_modtager::isValidStart()
+                0x00002bc2                X10_modtager::checkForZero(unsigned char)
+                0x00002bcc                X10_modtager::validatePackets()
+                0x00002c1c                X10_modtager::receiveData(unsigned char)
+                0x00002d1a                X10_modtager::fetchData(unsigned char&, unsigned char&, bool&)
+                0x00002d4a                X10_modtager::isDataReady()
+                0x00002d50                X10_modtager::startInput()
+                0x00002d5c                X10_modtager::inputComplete()
+                0x00002d7a                X10_modtager::receiveHigh()
+                0x00002dbc                X10_modtager::receiveLow()
+ .text          0x00002e06      0x450 X10/X10_sender.o
+                0x00002e06                X10_sender::X10_sender()
+                0x00002e06                X10_sender::X10_sender()
+                0x00002ea4                X10_sender::start120()
+                0x00002ec4                X10_sender::stop120()
+                0x00002ee4                X10_sender::setSendMode(bool)
+                0x00002eea                X10_sender::getSendMode()
+                0x00002ef0                X10_sender::getPacket1()
+                0x00002ef8                X10_sender::getPacket2()
+                0x00002f00                X10_sender::getCurrentPacket()
+                0x00002f06                X10_sender::setCurrentPacket(unsigned char)
+                0x00002f0c                X10_sender::decrementCurrentPos1()
+                0x00002f16                X10_sender::getCurrentPos1()
+                0x00002f1c                X10_sender::decrementCurrentPos2()
+                0x00002f26                X10_sender::getCurrentPos2()
+                0x00002f2c                X10_sender::generateParity(unsigned int, unsigned int)
+                0x00002f72                X10_sender::sendCommand(unsigned char, unsigned char, unsigned char, unsigned char)
+                0x000030de                X10_sender::sendHigh()
+                0x00003194                X10_sender::sendLow()
+ .text          0x00003256        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodqi4.o)
+ .text          0x00003256        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodsi4.o)
+ .text          0x00003256        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_exit.o)
+ .text          0x00003256        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_copy_data.o)
+ .text          0x00003256        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_clear_bss.o)
+ .text          0x00003256        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_ctors.o)
+ .text          0x00003256        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_tablejump_elpm.o)
+ .text          0x00003256        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/../../../../avr/lib/avr6\libc.a(itoa.o)
+ .text          0x00003256        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/../../../../avr/lib/avr6\libc.a(strrev.o)
+ .text          0x00003256        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodhi4.o)
+                0x00003256                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x000031fe       0x18 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodqi4.o)
-                0x000031fe                __udivmodqi4
- .text.libgcc   0x00003216       0x44 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodsi4.o)
-                0x00003216                __udivmodsi4
- .text.libgcc   0x0000325a        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_exit.o)
- .text.libgcc   0x0000325a        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_copy_data.o)
- .text.libgcc   0x0000325a        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_clear_bss.o)
- .text.libgcc   0x0000325a        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_ctors.o)
- .text.libgcc   0x0000325a        0x8 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_tablejump_elpm.o)
-                0x0000325a                __tablejump_elpm__
+ .text.libgcc   0x00003256       0x18 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodqi4.o)
+                0x00003256                __udivmodqi4
+ .text.libgcc   0x0000326e       0x44 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodsi4.o)
+                0x0000326e                __udivmodsi4
+ .text.libgcc   0x000032b2        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_exit.o)
+ .text.libgcc   0x000032b2        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_copy_data.o)
+ .text.libgcc   0x000032b2        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x000032b2        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_ctors.o)
+ .text.libgcc   0x000032b2        0x8 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_tablejump_elpm.o)
+                0x000032b2                __tablejump_elpm__
  .text.avr-libc
-                0x00003262       0x42 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/../../../../avr/lib/avr6\libc.a(itoa.o)
-                0x00003262                itoa
+                0x000032ba       0x42 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/../../../../avr/lib/avr6\libc.a(itoa.o)
+                0x000032ba                itoa
  .text.avr-libc
-                0x000032a4       0x20 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/../../../../avr/lib/avr6\libc.a(strrev.o)
-                0x000032a4                strrev
- .text.libgcc   0x000032c4       0x28 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodhi4.o)
-                0x000032c4                __udivmodhi4
-                0x000032ec                . = ALIGN (0x2)
+                0x000032fc       0x20 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/../../../../avr/lib/avr6\libc.a(strrev.o)
+                0x000032fc                strrev
+ .text.libgcc   0x0000331c       0x28 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodhi4.o)
+                0x0000331c                __udivmodhi4
+                0x00003344                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000032ec        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_exit.o)
-                0x000032ec                _exit
-                0x000032ec                exit
+ .fini9         0x00003344        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_exit.o)
+                0x00003344                _exit
+                0x00003344                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -442,11 +443,11 @@ LOAD c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000032ec        0x4 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_exit.o)
+ .fini0         0x00003344        0x4 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_exit.o)
  *(.fini0)
-                0x000032f0                _etext = .
+                0x00003348                _etext = .
 
-.data           0x00800200        0x0 load address 0x000032f0
+.data           0x00800200        0x0 load address 0x00003348
                 0x00800200                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800200        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/../../../../avr/lib/avr6/crtm2560.o
@@ -516,8 +517,8 @@ LOAD c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1
  *(.bss*)
  *(COMMON)
                 0x00800236                PROVIDE (__bss_end, .)
-                0x000032f0                __data_load_start = LOADADDR (.data)
-                0x000032f0                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00003348                __data_load_start = LOADADDR (.data)
+                0x00003348                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800236        0x0
                 0x00800236                PROVIDE (__noinit_start, .)
@@ -625,30 +626,30 @@ LOAD c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x71fa
+.debug_info     0x00000000     0x7287
  *(.debug_info)
  .debug_info    0x00000000      0x23e i2c/i2c.o
- .debug_info    0x0000023e     0x141e main.o
- .debug_info    0x0000165c     0x16b2 PCinterface/PCInterface.o
- .debug_info    0x00002d0e      0x6a1 RTC/rtc.o
- .debug_info    0x000033af      0x637 sd/sdCard.o
- .debug_info    0x000039e6      0x1e0 SPI/SPI.o
- .debug_info    0x00003bc6      0x313 UART/uartDriver.o
- .debug_info    0x00003ed9     0x10dc UnitHandler/UnitHandler.o
- .debug_info    0x00004fb5      0xbdd X10/X10.o
- .debug_info    0x00005b92      0x8a0 X10/X10_modtager.o
- .debug_info    0x00006432      0x6e0 X10/X10_sender.o
- .debug_info    0x00006b12       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodqi4.o)
- .debug_info    0x00006bef       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodsi4.o)
- .debug_info    0x00006ccc       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_exit.o)
- .debug_info    0x00006da9       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_copy_data.o)
- .debug_info    0x00006e86       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_clear_bss.o)
- .debug_info    0x00006f63       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_ctors.o)
- .debug_info    0x00007040       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_tablejump_elpm.o)
- .debug_info    0x0000711d       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodhi4.o)
+ .debug_info    0x0000023e     0x143e main.o
+ .debug_info    0x0000167c     0x16d2 PCinterface/PCInterface.o
+ .debug_info    0x00002d4e      0x6a1 RTC/rtc.o
+ .debug_info    0x000033ef      0x637 sd/sdCard.o
+ .debug_info    0x00003a26      0x1e0 SPI/SPI.o
+ .debug_info    0x00003c06      0x313 UART/uartDriver.o
+ .debug_info    0x00003f19     0x10dc UnitHandler/UnitHandler.o
+ .debug_info    0x00004ff5      0xc2a X10/X10.o
+ .debug_info    0x00005c1f      0x8a0 X10/X10_modtager.o
+ .debug_info    0x000064bf      0x6e0 X10/X10_sender.o
+ .debug_info    0x00006b9f       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodqi4.o)
+ .debug_info    0x00006c7c       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodsi4.o)
+ .debug_info    0x00006d59       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_exit.o)
+ .debug_info    0x00006e36       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_copy_data.o)
+ .debug_info    0x00006f13       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_clear_bss.o)
+ .debug_info    0x00006ff0       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_ctors.o)
+ .debug_info    0x000070cd       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_tablejump_elpm.o)
+ .debug_info    0x000071aa       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodhi4.o)
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev   0x00000000     0x16d2
+.debug_abbrev   0x00000000     0x16e7
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x128 i2c/i2c.o
  .debug_abbrev  0x00000128      0x24f main.o
@@ -658,41 +659,41 @@ LOAD c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1
  .debug_abbrev  0x00000a88      0x11f SPI/SPI.o
  .debug_abbrev  0x00000ba7      0x19a UART/uartDriver.o
  .debug_abbrev  0x00000d41      0x2f9 UnitHandler/UnitHandler.o
- .debug_abbrev  0x0000103a      0x1f7 X10/X10.o
- .debug_abbrev  0x00001231      0x1fa X10/X10_modtager.o
- .debug_abbrev  0x0000142b      0x207 X10/X10_sender.o
- .debug_abbrev  0x00001632       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodqi4.o)
- .debug_abbrev  0x00001646       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodsi4.o)
- .debug_abbrev  0x0000165a       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_exit.o)
- .debug_abbrev  0x0000166e       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_copy_data.o)
- .debug_abbrev  0x00001682       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_clear_bss.o)
- .debug_abbrev  0x00001696       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_ctors.o)
- .debug_abbrev  0x000016aa       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_tablejump_elpm.o)
- .debug_abbrev  0x000016be       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodhi4.o)
+ .debug_abbrev  0x0000103a      0x20c X10/X10.o
+ .debug_abbrev  0x00001246      0x1fa X10/X10_modtager.o
+ .debug_abbrev  0x00001440      0x207 X10/X10_sender.o
+ .debug_abbrev  0x00001647       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodqi4.o)
+ .debug_abbrev  0x0000165b       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodsi4.o)
+ .debug_abbrev  0x0000166f       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_exit.o)
+ .debug_abbrev  0x00001683       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_copy_data.o)
+ .debug_abbrev  0x00001697       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_clear_bss.o)
+ .debug_abbrev  0x000016ab       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_ctors.o)
+ .debug_abbrev  0x000016bf       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_tablejump_elpm.o)
+ .debug_abbrev  0x000016d3       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodhi4.o)
 
-.debug_line     0x00000000     0x1582
+.debug_line     0x00000000     0x15a0
  *(.debug_line)
  .debug_line    0x00000000       0x73 i2c/i2c.o
- .debug_line    0x00000073      0x1c4 main.o
- .debug_line    0x00000237      0x302 PCinterface/PCInterface.o
- .debug_line    0x00000539       0xdf RTC/rtc.o
- .debug_line    0x00000618      0x32c sd/sdCard.o
- .debug_line    0x00000944       0x6a SPI/SPI.o
- .debug_line    0x000009ae       0x8f UART/uartDriver.o
- .debug_line    0x00000a3d      0x389 UnitHandler/UnitHandler.o
- .debug_line    0x00000dc6       0xd6 X10/X10.o
- .debug_line    0x00000e9c      0x13b X10/X10_modtager.o
- .debug_line    0x00000fd7      0x109 X10/X10_sender.o
- .debug_line    0x000010e0       0x92 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodqi4.o)
- .debug_line    0x00001172       0xa8 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodsi4.o)
- .debug_line    0x0000121a       0x88 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_exit.o)
- .debug_line    0x000012a2       0x96 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_copy_data.o)
- .debug_line    0x00001338       0x8e c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_clear_bss.o)
- .debug_line    0x000013c6       0x98 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_ctors.o)
- .debug_line    0x0000145e       0x8a c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_tablejump_elpm.o)
- .debug_line    0x000014e8       0x9a c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodhi4.o)
+ .debug_line    0x00000073      0x1b6 main.o
+ .debug_line    0x00000229      0x302 PCinterface/PCInterface.o
+ .debug_line    0x0000052b       0xdf RTC/rtc.o
+ .debug_line    0x0000060a      0x32c sd/sdCard.o
+ .debug_line    0x00000936       0x6a SPI/SPI.o
+ .debug_line    0x000009a0       0x8f UART/uartDriver.o
+ .debug_line    0x00000a2f      0x389 UnitHandler/UnitHandler.o
+ .debug_line    0x00000db8      0x105 X10/X10.o
+ .debug_line    0x00000ebd      0x13e X10/X10_modtager.o
+ .debug_line    0x00000ffb      0x103 X10/X10_sender.o
+ .debug_line    0x000010fe       0x92 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodqi4.o)
+ .debug_line    0x00001190       0xa8 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodsi4.o)
+ .debug_line    0x00001238       0x88 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_exit.o)
+ .debug_line    0x000012c0       0x96 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_copy_data.o)
+ .debug_line    0x00001356       0x8e c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_clear_bss.o)
+ .debug_line    0x000013e4       0x98 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_ctors.o)
+ .debug_line    0x0000147c       0x8a c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_tablejump_elpm.o)
+ .debug_line    0x00001506       0x9a c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr6\libgcc.a(_udivmodhi4.o)
 
-.debug_frame    0x00000000     0x1084
+.debug_frame    0x00000000     0x108c
  *(.debug_frame)
  .debug_frame   0x00000000       0x64 i2c/i2c.o
  .debug_frame   0x00000064      0x27c main.o
@@ -702,56 +703,56 @@ LOAD c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1
  .debug_frame   0x0000075c       0x54 SPI/SPI.o
  .debug_frame   0x000007b0       0xa8 UART/uartDriver.o
  .debug_frame   0x00000858      0x3a4 UnitHandler/UnitHandler.o
- .debug_frame   0x00000bfc      0x194 X10/X10.o
- .debug_frame   0x00000d90      0x184 X10/X10_modtager.o
- .debug_frame   0x00000f14      0x170 X10/X10_sender.o
+ .debug_frame   0x00000bfc      0x19c X10/X10.o
+ .debug_frame   0x00000d98      0x184 X10/X10_modtager.o
+ .debug_frame   0x00000f1c      0x170 X10/X10_sender.o
 
-.debug_str      0x00000000     0x182e
+.debug_str      0x00000000     0x1845
  *(.debug_str)
  .debug_str     0x00000000      0x131 i2c/i2c.o
                                 0x16a (size before relaxing)
- .debug_str     0x00000131     0x1281 main.o
-                               0x13d0 (size before relaxing)
- .debug_str     0x000013b2       0xbd PCinterface/PCInterface.o
-                               0x139a (size before relaxing)
- .debug_str     0x0000146f       0xa9 RTC/rtc.o
+ .debug_str     0x00000131     0x1298 main.o
+                               0x13e7 (size before relaxing)
+ .debug_str     0x000013c9       0xbd PCinterface/PCInterface.o
+                               0x13b1 (size before relaxing)
+ .debug_str     0x00001486       0xa9 RTC/rtc.o
                                 0x33f (size before relaxing)
- .debug_str     0x00001518       0xb8 sd/sdCard.o
+ .debug_str     0x0000152f       0xb8 sd/sdCard.o
                                 0x2f3 (size before relaxing)
- .debug_str     0x000015d0       0x14 SPI/SPI.o
+ .debug_str     0x000015e7       0x14 SPI/SPI.o
                                 0x15b (size before relaxing)
- .debug_str     0x000015e4       0x56 UART/uartDriver.o
+ .debug_str     0x000015fb       0x56 UART/uartDriver.o
                                 0x1f2 (size before relaxing)
- .debug_str     0x0000163a      0x12d UnitHandler/UnitHandler.o
+ .debug_str     0x00001651      0x12d UnitHandler/UnitHandler.o
                                 0x6aa (size before relaxing)
- .debug_str     0x00001767       0x36 X10/X10.o
-                                0xb10 (size before relaxing)
- .debug_str     0x0000179d       0x29 X10/X10_modtager.o
+ .debug_str     0x0000177e       0x36 X10/X10.o
+                                0xb27 (size before relaxing)
+ .debug_str     0x000017b4       0x29 X10/X10_modtager.o
                                 0x62a (size before relaxing)
- .debug_str     0x000017c6       0x68 X10/X10_sender.o
+ .debug_str     0x000017dd       0x68 X10/X10_sender.o
                                 0x4ba (size before relaxing)
 
-.debug_loc      0x00000000     0x44da
+.debug_loc      0x00000000     0x453a
  *(.debug_loc)
  .debug_loc     0x00000000       0x88 i2c/i2c.o
  .debug_loc     0x00000088      0x5a3 main.o
- .debug_loc     0x0000062b      0x685 PCinterface/PCInterface.o
- .debug_loc     0x00000cb0      0x7bf RTC/rtc.o
- .debug_loc     0x0000146f      0x65e sd/sdCard.o
- .debug_loc     0x00001acd       0x98 SPI/SPI.o
- .debug_loc     0x00001b65      0x23c UART/uartDriver.o
- .debug_loc     0x00001da1     0x16a5 UnitHandler/UnitHandler.o
- .debug_loc     0x00003446      0x5ba X10/X10.o
- .debug_loc     0x00003a00      0x50f X10/X10_modtager.o
- .debug_loc     0x00003f0f      0x5cb X10/X10_sender.o
+ .debug_loc     0x0000062b      0x67a PCinterface/PCInterface.o
+ .debug_loc     0x00000ca5      0x7bf RTC/rtc.o
+ .debug_loc     0x00001464      0x65e sd/sdCard.o
+ .debug_loc     0x00001ac2       0x98 SPI/SPI.o
+ .debug_loc     0x00001b5a      0x23c UART/uartDriver.o
+ .debug_loc     0x00001d96     0x16a5 UnitHandler/UnitHandler.o
+ .debug_loc     0x0000343b      0x5ee X10/X10.o
+ .debug_loc     0x00003a29      0x50f X10/X10_modtager.o
+ .debug_loc     0x00003f38      0x602 X10/X10_sender.o
 
 .debug_macinfo
  *(.debug_macinfo)
 OUTPUT(Simuring.elf elf32-avr)
 LOAD linker stubs
 
-.debug_ranges   0x00000000      0x1d8
- .debug_ranges  0x00000000       0x50 main.o
- .debug_ranges  0x00000050       0x68 PCinterface/PCInterface.o
- .debug_ranges  0x000000b8       0x18 sd/sdCard.o
- .debug_ranges  0x000000d0      0x108 UnitHandler/UnitHandler.o
+.debug_ranges   0x00000000      0x1d0
+ .debug_ranges  0x00000000       0x48 main.o
+ .debug_ranges  0x00000048       0x68 PCinterface/PCInterface.o
+ .debug_ranges  0x000000b0       0x18 sd/sdCard.o
+ .debug_ranges  0x000000c8      0x108 UnitHandler/UnitHandler.o
